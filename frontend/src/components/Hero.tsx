@@ -1,10 +1,80 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, Mail, MapPin, Clock } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Twitter, Mail, MapPin, Clock, Calendar, Sun } from 'lucide-react';
 import LaserFlow from './LaserFlow';
 
-// Clock component for Trichirapalli time
-function LocalClock() {
+// Hidden reveal element with smooth, cool purplish effects
+function HiddenRevealElement({
+  children,
+  className = '',
+  style = {},
+  delay = 0
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  delay?: number;
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className={`absolute cursor-default ${className}`}
+      style={style}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.8,
+              y: 10,
+              filter: 'blur(10px)'
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              filter: 'blur(0px)'
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.9,
+              y: -5,
+              filter: 'blur(5px)'
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.23, 1, 0.32, 1],
+              delay: delay
+            }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Hover hint - subtle glow indicator */}
+      <motion.div
+        className="w-3 h-3 rounded-full bg-purple-500/30"
+        animate={{
+          scale: isHovered ? 0 : [1, 1.2, 1],
+          opacity: isHovered ? 0 : [0.3, 0.6, 0.3]
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      />
+    </div>
+  );
+}
+
+// Live time component with enhanced styling
+function LiveTime() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -12,48 +82,132 @@ function LocalClock() {
     return () => clearInterval(timer);
   }, []);
 
-  const options: Intl.DateTimeFormatOptions = {
-    timeZone: 'Asia/Kolkata',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-  };
+  return (
+    <motion.div
+      className="bg-gradient-to-br from-zinc-900/80 via-purple-950/40 to-zinc-900/80 backdrop-blur-xl rounded-2xl px-6 py-5 border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)]"
+      whileHover={{
+        boxShadow: '0 0 50px rgba(168,85,247,0.3)',
+        borderColor: 'rgba(168,85,247,0.5)'
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <Clock size={14} className="text-purple-400" />
+        <p className="text-xs text-purple-400/80 uppercase tracking-widest font-medium">Current Time</p>
+      </div>
+      <motion.span
+        className="font-mono text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent tracking-wider"
+        animate={{ opacity: [1, 0.8, 1] }}
+        transition={{ duration: 1, repeat: Infinity }}
+      >
+        {time.toLocaleTimeString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })}
+      </motion.span>
+    </motion.div>
+  );
+}
 
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    timeZone: 'Asia/Kolkata',
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  };
+// Live day component with enhanced styling
+function LiveDay() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6, duration: 0.5 }}
-      className="flex items-center gap-4 text-zinc-400 text-sm"
+      className="bg-gradient-to-br from-zinc-900/80 via-purple-950/40 to-zinc-900/80 backdrop-blur-xl rounded-2xl px-6 py-5 border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)]"
+      whileHover={{
+        boxShadow: '0 0 50px rgba(168,85,247,0.3)',
+        borderColor: 'rgba(168,85,247,0.5)'
+      }}
+      transition={{ duration: 0.3 }}
     >
-      <div className="flex items-center gap-2">
-        <MapPin size={14} className="text-purple-500" />
-        <span>Trichirapalli, TN</span>
+      <div className="flex items-center gap-2 mb-2">
+        <Sun size={14} className="text-purple-400" />
+        <p className="text-xs text-purple-400/80 uppercase tracking-widest font-medium">Today</p>
       </div>
-      <div className="w-px h-4 bg-zinc-700" />
-      <div className="flex items-center gap-2">
-        <Clock size={14} className="text-red-500" />
-        <span className="font-mono">{time.toLocaleTimeString('en-IN', options)}</span>
+      <span className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-purple-500 bg-clip-text text-transparent uppercase tracking-widest">
+        {time.toLocaleDateString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          weekday: 'long',
+        })}
+      </span>
+    </motion.div>
+  );
+}
+
+// Live date component with enhanced styling
+function LiveDate() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <motion.div
+      className="bg-gradient-to-br from-zinc-900/80 via-purple-950/40 to-zinc-900/80 backdrop-blur-xl rounded-2xl px-6 py-5 border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)]"
+      whileHover={{
+        boxShadow: '0 0 50px rgba(168,85,247,0.3)',
+        borderColor: 'rgba(168,85,247,0.5)'
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <Calendar size={14} className="text-purple-400" />
+        <p className="text-xs text-purple-400/80 uppercase tracking-widest font-medium">Date</p>
       </div>
-      <div className="hidden sm:block w-px h-4 bg-zinc-700" />
-      <span className="hidden sm:block">{time.toLocaleDateString('en-IN', dateOptions)}</span>
+      <span className="text-xl font-semibold text-zinc-200">
+        {time.toLocaleDateString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </span>
+    </motion.div>
+  );
+}
+
+// Location component with enhanced styling
+function LocationCard() {
+  return (
+    <motion.div
+      className="bg-gradient-to-br from-zinc-900/80 via-purple-950/40 to-zinc-900/80 backdrop-blur-xl rounded-2xl px-6 py-5 border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)]"
+      whileHover={{
+        boxShadow: '0 0 50px rgba(168,85,247,0.3)',
+        borderColor: 'rgba(168,85,247,0.5)'
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <MapPin size={14} className="text-purple-400" />
+        <p className="text-xs text-purple-400/80 uppercase tracking-widest font-medium">Location</p>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-xl font-semibold text-zinc-200">Tiruchirappalli</span>
+      </div>
+      <p className="text-sm text-zinc-500 mt-1">Tamil Nadu, India 🇮🇳</p>
     </motion.div>
   );
 }
 
 export default function Hero() {
   return (
-    <section id="home" className="min-h-screen w-full relative bg-black overflow-hidden flex items-center justify-center">
-      {/* LaserFlow Background */}
+    <section
+      id="home"
+      className="min-h-screen w-full relative bg-black overflow-hidden"
+    >
+      {/* LaserFlow Background - UNCHANGED */}
       <div className="absolute inset-0 z-0">
         <LaserFlow
           horizontalBeamOffset={0.0}
@@ -66,89 +220,131 @@ export default function Hero() {
         />
       </div>
 
-      {/* Gradient overlays for depth */}
+      {/* Gradient overlays for depth - UNCHANGED */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50 pointer-events-none z-[1]" />
 
-      {/* Content */}
-      <div className="z-10 text-center px-6 max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6"
-        >
-          <span className="inline-block px-4 py-2 rounded-full glass text-sm text-zinc-300 mb-4">
-            👋 Welcome to my portfolio
-          </span>
-        </motion.div>
+      {/* Main Content Container */}
+      <div className="relative z-10 min-h-screen flex items-center">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight"
-        >
-          Hi, I'm{' '}
-          <span className="text-gradient">John Doe</span>
-        </motion.h1>
+            {/* LEFT SIDE - Main Content */}
+            <div className="text-left">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="mb-6"
+              >
+                <span className="inline-block px-4 py-2 rounded-full glass text-sm text-zinc-300">
+                  👋 Welcome to my portfolio
+                </span>
+              </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg sm:text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-8 leading-relaxed"
-        >
-          Full Stack Developer & Software Engineer specializing in building exceptional digital experiences
-        </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight"
+              >
+                Hi, I'm{' '}
+                <span className="text-gradient">John Doe</span>
+              </motion.h1>
 
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex justify-center gap-4 mb-8"
-        >
-          {[
-            { icon: Github, href: '#', label: 'GitHub' },
-            { icon: Linkedin, href: '#', label: 'LinkedIn' },
-            { icon: Twitter, href: '#', label: 'Twitter' },
-            { icon: Mail, href: '#contact', label: 'Email' },
-          ].map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              className="p-3 rounded-full glass hover:glow-purple transition-all duration-300 hover:scale-110 text-zinc-400 hover:text-white"
-            >
-              <Icon size={20} />
-            </a>
-          ))}
-        </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg sm:text-xl text-zinc-400 max-w-lg mb-8 leading-relaxed"
+              >
+                Full Stack Developer & Software Engineer specializing in building exceptional digital experiences
+              </motion.p>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row justify-center gap-4 mb-12"
-        >
-          <a
-            href="#projects"
-            className="px-8 py-4 rounded-full bg-gradient-to-r from-red-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 glow-gradient"
-          >
-            View My Work
-          </a>
-          <a
-            href="#contact"
-            className="px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/10 transition-all duration-300"
-          >
-            Get in Touch
-          </a>
-        </motion.div>
+              {/* Social Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex gap-4 mb-8"
+              >
+                {[
+                  { icon: Github, href: '#', label: 'GitHub' },
+                  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+                  { icon: Twitter, href: '#', label: 'Twitter' },
+                  { icon: Mail, href: '#contact', label: 'Email' },
+                ].map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className="p-3 rounded-full glass hover:glow-purple transition-all duration-300 hover:scale-110 text-zinc-400 hover:text-white"
+                  >
+                    <Icon size={20} />
+                  </a>
+                ))}
+              </motion.div>
 
-        {/* Local Time */}
-        <div className="flex justify-center">
-          <LocalClock />
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-wrap gap-4"
+              >
+                <a
+                  href="#projects"
+                  className="px-8 py-4 rounded-full bg-gradient-to-r from-red-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 glow-gradient"
+                >
+                  View My Work →
+                </a>
+                <a
+                  href="#contact"
+                  className="px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/10 transition-all duration-300"
+                >
+                  Get in Touch
+                </a>
+              </motion.div>
+            </div>
+
+            {/* RIGHT SIDE - Hidden Reveal Elements */}
+            <div className="relative h-[500px] hidden lg:block">
+              {/* Time - Top */}
+              <HiddenRevealElement
+                className="z-[2]"
+                style={{ top: '5%', right: '10%' }}
+                delay={0}
+              >
+                <LiveTime />
+              </HiddenRevealElement>
+
+              {/* Day - Upper Middle */}
+              <HiddenRevealElement
+                className="z-[2]"
+                style={{ top: '28%', right: '30%' }}
+                delay={0.05}
+              >
+                <LiveDay />
+              </HiddenRevealElement>
+
+              {/* Date - Lower Middle */}
+              <HiddenRevealElement
+                className="z-[2]"
+                style={{ top: '52%', right: '8%' }}
+                delay={0.1}
+              >
+                <LiveDate />
+              </HiddenRevealElement>
+
+              {/* Location - Bottom */}
+              <HiddenRevealElement
+                className="z-[2]"
+                style={{ bottom: '8%', right: '22%' }}
+                delay={0.15}
+              >
+                <LocationCard />
+              </HiddenRevealElement>
+            </div>
+          </div>
         </div>
       </div>
 

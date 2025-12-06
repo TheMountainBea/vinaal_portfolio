@@ -5,11 +5,12 @@ import {
   SiGit, SiDocker, SiFigma, SiNextdotjs,
   SiTailwindcss, SiPython, SiDjango, SiExpress
 } from 'react-icons/si';
+import ElectricBorder from './ElectricBorder';
 
 const skillCategories = [
   {
     category: 'Frontend Development',
-    color: 'from-red-500 to-orange-500',
+    color: '#ef4444',
     skills: [
       { name: 'React', icon: SiReact, level: 90 },
       { name: 'Next.js', icon: SiNextdotjs, level: 85 },
@@ -22,7 +23,7 @@ const skillCategories = [
   },
   {
     category: 'Backend Development',
-    color: 'from-purple-500 to-pink-500',
+    color: '#a855f7',
     skills: [
       { name: 'Node.js', icon: SiNodedotjs, level: 88 },
       { name: 'Express.js', icon: SiExpress, level: 85 },
@@ -34,7 +35,7 @@ const skillCategories = [
   },
   {
     category: 'Tools & Design',
-    color: 'from-blue-500 to-cyan-500',
+    color: '#06b6d4',
     skills: [
       { name: 'Git', icon: SiGit, level: 90 },
       { name: 'Docker', icon: SiDocker, level: 75 },
@@ -75,41 +76,52 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: catIdx * 0.1 }}
-              className="p-6 rounded-2xl glass hover:glow-gradient transition-all duration-500 group"
             >
-              <h3 className={`text-xl font-bold mb-6 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
-                {category.category}
-              </h3>
+              <ElectricBorder
+                color={category.color}
+                speed={0.8}
+                chaos={0.4}
+                thickness={2}
+                style={{ borderRadius: 16 }}
+                className="h-full"
+              >
+                <div className="p-6 bg-zinc-900/80 rounded-2xl h-full">
+                  <h3 className="text-xl font-bold mb-6" style={{ color: category.color }}>
+                    {category.category}
+                  </h3>
 
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIdx) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: catIdx * 0.1 + skillIdx * 0.05 }}
-                    className="group/skill"
-                  >
-                    <div className="flex items-center gap-3 mb-2">
-                      <skill.icon className="w-5 h-5 text-zinc-400 group-hover/skill:text-white transition-colors" />
-                      <span className="text-sm text-zinc-300 group-hover/skill:text-white transition-colors">
-                        {skill.name}
-                      </span>
-                      <span className="ml-auto text-xs text-zinc-500">{skill.level}%</span>
-                    </div>
-                    <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="space-y-4">
+                    {category.skills.map((skill, skillIdx) => (
                       <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
+                        key={skill.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1, delay: catIdx * 0.1 + skillIdx * 0.05, ease: 'easeOut' }}
-                        className={`h-full rounded-full bg-gradient-to-r ${category.color}`}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+                        transition={{ delay: catIdx * 0.1 + skillIdx * 0.05 }}
+                        className="group/skill"
+                      >
+                        <div className="flex items-center gap-3 mb-2">
+                          <skill.icon className="w-5 h-5 text-zinc-400 group-hover/skill:text-white transition-colors" />
+                          <span className="text-sm text-zinc-300 group-hover/skill:text-white transition-colors">
+                            {skill.name}
+                          </span>
+                          <span className="ml-auto text-xs text-zinc-500">{skill.level}%</span>
+                        </div>
+                        <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${skill.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: catIdx * 0.1 + skillIdx * 0.05, ease: 'easeOut' }}
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: category.color }}
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </ElectricBorder>
             </motion.div>
           ))}
         </div>
