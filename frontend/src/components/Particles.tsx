@@ -1,20 +1,17 @@
-import { useCallback } from 'react';
-import Particles from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim';
-import type { Engine } from '@tsparticles/engine';
 import { useEffect, useState } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadFull } from "tsparticles";
+
 
 export default function ParticlesBackground() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    loadSlim().then((engine) => {
+    initParticlesEngine(async (engine) => {
+      await loadFull(engine);
+    }).then(() => {
       setInit(true);
     });
-  }, []);
-
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
   }, []);
 
   if (!init) return null;
@@ -22,7 +19,6 @@ export default function ParticlesBackground() {
   return (
     <Particles
       id="tsparticles"
-      init={particlesInit}
       className="absolute inset-0 z-0"
       options={{
         background: {
@@ -41,7 +37,9 @@ export default function ParticlesBackground() {
               enable: true,
               mode: 'repulse',
             },
-            resize: true,
+            resize: {
+              enable: true
+            }
           },
           modes: {
             push: {
@@ -77,7 +75,8 @@ export default function ParticlesBackground() {
           number: {
             density: {
               enable: true,
-              area: 800,
+              width: 1920,
+              height: 1080,
             },
             value: 80,
           },
