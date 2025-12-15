@@ -6,7 +6,9 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Background', href: '#more-about' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -118,7 +120,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center" style={{ gap: '30px' }}>
+          <ul className="hidden md:flex items-center" style={{ gap: '20px' }}>
             {navItems.map((item) => (
               <li key={item.label}>
                 <a

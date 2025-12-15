@@ -4,6 +4,7 @@ import About from './components/About';
 import Skills from './components/Skills';
 import MoreAboutMe from './components/MoreAboutMe';
 import Projects from './components/Projects';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import LetsConnect from './components/LetsConnect';
 import Footer from './components/Footer';
@@ -18,6 +19,7 @@ function App() {
         <Skills />
         <MoreAboutMe />
         <Projects />
+        <Certifications />
         <Contact />
         <LetsConnect />
       </main>

@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Smartphone, Layout, Calculator } from 'lucide-react';
+import { ExternalLink, Github, Smartphone, Layout, Calculator, Gamepad2, FileText, Activity, Sigma, Repeat, Coffee, Palette, Scissors } from 'lucide-react';
 import Magnet from './Magnet';
+import imgRockPaperScissors from '../assets/projects/rockpaperscissors.jpg';
 
 const projects = [
   {
     id: 1,
     title: 'Techy Zone',
-    description: 'A comprehensive tech resource hub featuring curated links to AI tools, development resources, design assets, cloud storage, cybersecurity tools, and more. Built as a one-stop solution for developers and tech enthusiasts.',
+    description: 'A comprehensive tech resource hub featuring curated links to AI tools, development resources, design assets, cloud storage, cybersecurity tools, and more.',
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
     tech: ['HTML', 'CSS', 'JavaScript', 'Netlify'],
     icon: Layout,
@@ -17,24 +18,120 @@ const projects = [
   {
     id: 2,
     title: 'Mobile SmartZ',
-    description: 'A sleek e-commerce platform for premium smartphones featuring product showcases, responsive design, and smooth navigation. Displays flagship devices from Apple, Samsung, Google, and Nothing with pricing and features.',
+    description: 'A sleek e-commerce platform for premium smartphones featuring product showcases, responsive design, and smooth navigation.',
     image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop',
     tech: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
     icon: Smartphone,
     github: 'https://github.com/Dark-Vinaal/E-commerce-site-bootstrap',
-    live: 'https://dark-vinaal.github.io/E-commerce-site-bootstrap/',
+    live: 'https://dark-vinaal.github.io/Mobile-SmartZ/',
     color: 'from-red-500 to-orange-500',
+  },
+  {
+    id: 4,
+    title: 'Asphalt Velocity',
+    description: 'A high-octane racing game experience built for web browsers. Features dynamic controls and engaging gameplay mechanics.',
+    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=400&fit=crop',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: Gamepad2,
+    github: 'https://github.com/Dark-Vinaal/Asphalt_Velocity',
+    live: 'https://dark-vinaal.github.io/Asphalt_Velocity/',
+    color: 'from-emerald-500 to-cyan-500',
   },
   {
     id: 3,
     title: 'Modern Calculator',
-    description: 'A beautiful, responsive calculator with dual theme support for dark and light backgrounds. Features clean UI design, smooth animations, and all essential mathematical operations.',
+    description: 'A beautiful, responsive calculator with dual theme support for dark and light backgrounds. Features clean UI design and smooth animations.',
     image: 'https://images.unsplash.com/photo-1587145820266-a5951ee6f620?w=600&h=400&fit=crop',
     tech: ['HTML', 'CSS', 'JavaScript'],
     icon: Calculator,
     github: 'https://github.com/Dark-Vinaal/Calculator-JS',
     live: 'https://dark-vinaal.github.io/Calculator-JS/',
     color: 'from-green-500 to-teal-500',
+  },
+  {
+    id: 5,
+    title: 'Bio-Data Form',
+    description: 'A responsive biological data collection form with verification logic and clean user interface design.',
+    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: FileText,
+    github: 'https://github.com/Dark-Vinaal/biodata-form',
+    live: 'https://dark-vinaal.github.io/biodata-form/',
+    color: 'from-blue-500 to-indigo-500',
+  },
+  {
+    id: 6,
+    title: 'Average Calculator',
+    description: 'A utility tool for quickly calculating mathematical averages with a simple and intuitive interface.',
+    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: Sigma,
+    github: 'https://github.com/Dark-Vinaal/Average-Calculator',
+    live: 'https://dark-vinaal.github.io/Average-Calculator/',
+    color: 'from-yellow-500 to-orange-500',
+  },
+  {
+    id: 7,
+    title: 'BMI Calculator',
+    description: 'Health monitoring tool that calculates Body Mass Index based on user input, providing instant health category feedback.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: Activity,
+    github: 'https://github.com/Dark-Vinaal/BMI-Calculator',
+    live: 'https://dark-vinaal.github.io/BMI-Calculator/',
+    color: 'from-rose-500 to-pink-500',
+  },
+  {
+    id: 8,
+    title: 'Factorial Calculator',
+    description: 'Mathematical tool for computing factorials efficiently, demonstrating recursive and iterative logic.',
+    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: Calculator,
+    github: 'https://github.com/Dark-Vinaal/Factorial-JS',
+    live: 'https://dark-vinaal.github.io/Factorial-JS/',
+    color: 'from-violet-500 to-purple-500',
+  },
+  {
+    id: 9,
+    title: 'Palindrome Checker',
+    description: 'String manipulation tool that validates whether a text string is a palindrome, ignoring special characters and case.',
+    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: Repeat,
+    github: 'https://github.com/Dark-Vinaal/Palindrome-JS',
+    live: 'https://dark-vinaal.github.io/Palindrome-JS/',
+    color: 'from-cyan-500 to-blue-500',
+  },
+  {
+    id: 10,
+    title: 'Calculator Java',
+    description: 'A robust calculator application built with Java, featuring a graphical user interface and advanced operations.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop',
+    tech: ['Java', 'Swing', 'POO'],
+    icon: Coffee,
+    github: 'https://github.com/Dark-Vinaal/Calculator-Java',
+    color: 'from-orange-600 to-red-600',
+  },
+  {
+    id: 11,
+    title: 'Color Picker',
+    description: 'A Chrome extension for identifying and copying color codes from any webpage with ease.',
+    image: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600&h=400&fit=crop',
+    tech: ['JavaScript', 'Chrome API', 'HTML/CSS'],
+    icon: Palette,
+    github: 'https://github.com/Dark-Vinaal/Color-Picker',
+    color: 'from-pink-500 to-rose-500',
+  },
+  {
+    id: 12,
+    title: 'Rock-Paper-Scissors',
+    description: 'Classic game implementation featuring game logic, score tracking, and interactive user feedback.',
+    image: imgRockPaperScissors,
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    icon: Scissors,
+    github: 'https://github.com/Dark-Vinaal/Rock-Paper-Scissor',
+    color: 'from-green-500 to-emerald-500',
   },
 ];
 
@@ -61,18 +158,18 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project, idx) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
-              className="group relative rounded-2xl overflow-hidden glass hover:glow-gradient transition-all duration-500"
+              transition={{ delay: idx * 0.1 }}
+              className="group relative rounded-2xl overflow-hidden glass hover:glow-gradient transition-all duration-500 h-full flex flex-col"
             >
               {/* Image */}
-              <div className="aspect-video overflow-hidden relative">
+              <div className="aspect-video overflow-hidden relative shrink-0">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -87,7 +184,7 @@ export default function Projects() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all">
                   {project.title}
                 </h3>
@@ -96,7 +193,7 @@ export default function Projects() {
                 </p>
 
                 {/* Tech stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-6 mt-auto">
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
@@ -108,16 +205,18 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-4">
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    <span>View</span>
-                  </a>
+                <div className="flex gap-4 pt-4 border-t border-zinc-800/50">
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      <span>View</span>
+                    </a>
+                  )}
                   <a
                     href={project.github}
                     target="_blank"
@@ -141,7 +240,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.2 }}
           className="text-center mt-12"
         >
           <style>{`
@@ -198,7 +297,7 @@ export default function Projects() {
           `}</style>
           <Magnet padding={50} disabled={false} magnetStrength={50}>
             <a
-              href="https://github.com/Dark-Vinaal?tab=repositories"
+              href="https://github.com/Dark-Vinaal/Dark-Vinaal/blob/main/PROJECTS/Projects.md"
               target="_blank"
               rel="noopener noreferrer"
               className="view-all-btn"
